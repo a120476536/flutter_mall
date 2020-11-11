@@ -3,8 +3,6 @@
 电商
 效果预览
 
-![app_gif](http://note.youdao.com/yws/public/resource/52a3e8f8688e9ab35205da135ac7eda7/xmlnote/8FE70D3537F548EB90C745C2780BC3C6/25981)
-
 ![app_gif_github](https://github.com/a120476536/flutter_mall/blob/main/flutter_mall.gif?raw=true)
 
 android apk 下载
