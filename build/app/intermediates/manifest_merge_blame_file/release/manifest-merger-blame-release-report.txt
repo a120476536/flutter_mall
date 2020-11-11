@@ -1,0 +1,182 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.qiao.flutter_mall_self"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="16"
+8-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml
+10
+11    <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
+12    <!-- <uses-permission android:name="android.permission.INTERNET" /> -->
+13    <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
+14    <!-- <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> -->
+15
+16
+17    <!-- 用于进行网络定位 -->
+18    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+18-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:59:5-97
+18-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:59:22-78
+19    <!-- 用于访问GPS定位 -->
+20    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+20-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:61:5-95
+20-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:61:22-76
+21    <!-- 用于获取运营商信息，用于支持提供运营商信息相关的接口 -->
+22    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+22-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:63:5-95
+22-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:63:22-76
+23    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+24    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+24-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:65:5-92
+24-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:65:22-73
+25    <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+26    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+26-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:67:5-92
+26-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:67:22-73
+27    <!-- 用于访问网络，网络定位需要上网 -->
+28    <uses-permission android:name="android.permission.INTERNET" />
+28-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:69:5-83
+28-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:69:22-64
+29    <!-- 用于读取手机当前的状态 -->
+30    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+30-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:71:5-91
+30-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:71:22-72
+31    <!-- 用于写入缓存数据到扩展存储卡 -->
+32    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+32-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:73:5-97
+32-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:73:22-78
+33    <!-- 用于申请调用A-GPS模块 -->
+34    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+34-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:75:5-105
+34-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:75:22-86
+35    <!-- 用于申请获取蓝牙信息进行室内定位 -->
+36    <uses-permission android:name="android.permission.BLUETOOTH" />
+36-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:77:5-84
+36-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:77:22-65
+37    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+37-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:78:5-90
+37-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:78:22-71
+38
+39    <application
+39-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:3:4-51:19
+40        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+40-->[androidx.core:core:1.3.1] C:\Users\Administrator\.gradle\caches\transforms-2\files-2.1\92122df0879963db4a927cde31ef6bfe\core-1.3.1\AndroidManifest.xml:24:18-86
+41        android:icon="@mipmap/ic_launcher"
+41-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:5:9-43
+42        android:label="flutter_mall_self" >
+42-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:4:9-42
+43        <activity
+43-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:6:9-36:20
+44            android:name="com.qiao.flutter_mall_self.MainActivity"
+44-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:7:13-41
+45            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+45-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:10:13-163
+46            android:hardwareAccelerated="true"
+46-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:11:13-47
+47            android:launchMode="singleTop"
+47-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:8:13-43
+48            android:theme="@style/LaunchTheme"
+48-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:9:13-47
+49            android:windowSoftInputMode="adjustResize" >
+49-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:12:13-55
+50
+51            <!--
+52                 Specifies an Android theme to apply to this Activity as soon as
+53                 the Android process has started. This theme is visible to the user
+54                 while the Flutter UI initializes. After that, this theme continues
+55                 to determine the Window background behind the Flutter UI.
+56            -->
+57            <meta-data
+57-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:17:13-18:66
+58                android:name="io.flutter.network-policy"
+58-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:17:24-64
+59                android:resource="@xml/network_security_config" />
+59-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:18:17-64
+60            <meta-data
+60-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:19:13-22:17
+61                android:name="io.flutter.embedding.android.NormalTheme"
+61-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:20:15-70
+62                android:resource="@style/NormalTheme" />
+62-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:21:15-52
+63            <!--
+64                 Displays an Android View that continues showing the launch screen
+65                 Drawable until Flutter paints its first frame, then this splash
+66                 screen fades out. A splash screen is useful to avoid any visual
+67                 gap between the end of Android's launch screen and the painting of
+68                 Flutter's first frame.
+69            -->
+70            <!-- <meta-data -->
+71            <!-- android:name="io.flutter.embedding.android.SplashScreenDrawable" -->
+72            <!-- android:resource="@drawable/launch_background" -->
+73            <!-- /> -->
+74            <intent-filter>
+74-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:32:13-35:29
+75                <action android:name="android.intent.action.MAIN" />
+75-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:33:17-68
+75-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:33:25-66
+76
+77                <category android:name="android.intent.category.LAUNCHER" />
+77-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:34:17-76
+77-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:34:27-74
+78            </intent-filter>
+79        </activity>
+80        <!--
+81             Don't delete the meta-data below.
+82             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+83        -->
+84        <meta-data
+84-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:39:9-41:33
+85            android:name="flutterEmbedding"
+85-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:40:13-44
+86            android:value="2" />
+86-->D:\asProject\flutter_mall_self\android\app\src\main\AndroidManifest.xml:41:13-30
+87        <!-- 百度地图 -->
+88        <!-- <meta-data -->
+89        <!-- android:name="com.baidu.lbsapi.API_KEY" -->
+90        <!-- android:value="whceE883KVAVpgETPzvpezYdBiaFqNWb" /> -->
+91
+92
+93        <!-- <meta-data -->
+94        <!-- android:name="com.amap.api.v2.apikey" -->
+95        <!-- android:value="393df47ece567e8018b4faefb3c59415"> -->
+96        <!-- </meta-data> -->
+97        <provider
+97-->[:share] D:\asProject\flutter_mall_self\build\share\intermediates\library_manifest\release\AndroidManifest.xml:8:9-16:20
+98            android:name="io.flutter.plugins.share.ShareFileProvider"
+98-->[:share] D:\asProject\flutter_mall_self\build\share\intermediates\library_manifest\release\AndroidManifest.xml:9:13-70
+99            android:authorities="com.qiao.flutter_mall_self.flutter.share_provider"
+99-->[:share] D:\asProject\flutter_mall_self\build\share\intermediates\library_manifest\release\AndroidManifest.xml:10:13-74
+100            android:exported="false"
+100-->[:share] D:\asProject\flutter_mall_self\build\share\intermediates\library_manifest\release\AndroidManifest.xml:11:13-37
+101            android:grantUriPermissions="true" >
+101-->[:share] D:\asProject\flutter_mall_self\build\share\intermediates\library_manifest\release\AndroidManifest.xml:12:13-47
+102            <meta-data
+102-->[:share] D:\asProject\flutter_mall_self\build\share\intermediates\library_manifest\release\AndroidManifest.xml:13:13-15:68
+103                android:name="android.support.FILE_PROVIDER_PATHS"
+103-->[:share] D:\asProject\flutter_mall_self\build\share\intermediates\library_manifest\release\AndroidManifest.xml:14:17-67
+104                android:resource="@xml/flutter_share_file_paths" />
+104-->[:share] D:\asProject\flutter_mall_self\build\share\intermediates\library_manifest\release\AndroidManifest.xml:15:17-65
+105        </provider>
+106        <provider
+106-->[:flutter_webview_plugin] D:\asProject\flutter_mall_self\build\flutter_webview_plugin\intermediates\library_manifest\release\AndroidManifest.xml:9:9-18:20
+107            android:name="androidx.core.content.FileProvider"
+107-->[:flutter_webview_plugin] D:\asProject\flutter_mall_self\build\flutter_webview_plugin\intermediates\library_manifest\release\AndroidManifest.xml:10:13-62
+108            android:authorities="com.qiao.flutter_mall_self.fileprovider"
+108-->[:flutter_webview_plugin] D:\asProject\flutter_mall_self\build\flutter_webview_plugin\intermediates\library_manifest\release\AndroidManifest.xml:11:13-64
+109            android:exported="false"
+109-->[:flutter_webview_plugin] D:\asProject\flutter_mall_self\build\flutter_webview_plugin\intermediates\library_manifest\release\AndroidManifest.xml:12:13-37
+110            android:grantUriPermissions="true" >
+110-->[:flutter_webview_plugin] D:\asProject\flutter_mall_self\build\flutter_webview_plugin\intermediates\library_manifest\release\AndroidManifest.xml:13:13-47
+111            <meta-data
+111-->[:share] D:\asProject\flutter_mall_self\build\share\intermediates\library_manifest\release\AndroidManifest.xml:13:13-15:68
+112                android:name="android.support.FILE_PROVIDER_PATHS"
+112-->[:share] D:\asProject\flutter_mall_self\build\share\intermediates\library_manifest\release\AndroidManifest.xml:14:17-67
+113                android:resource="@xml/filepaths" />
+113-->[:share] D:\asProject\flutter_mall_self\build\share\intermediates\library_manifest\release\AndroidManifest.xml:15:17-65
+114        </provider>
+115    </application>
+116
+117</manifest>

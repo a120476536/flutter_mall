@@ -1,16 +1,62 @@
 # flutter_mall_self
 
 电商
+效果预览
 
-## Getting Started
+![app_gif](http://note.youdao.com/yws/public/resource/52a3e8f8688e9ab35205da135ac7eda7/xmlnote/8FE70D3537F548EB90C745C2780BC3C6/25981)
 
-This project is a starting point for a Flutter application.
+android apk
 
-A few resources to get you started if this is your first Flutter project:
+![android_apk下载](data:image/png;base64,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)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## 插件
+  - flutter_swiper: ^1.1.6
+  - json_annotation: ^2.3.0
+  - dio: ^3.0.10
+  - flutter_spinkit: ^3.1.0
+  - #  pull_to_refresh: ^1.4.7
+  - event_bus: ^1.1.0
+  - flutter_html: ^0.10.4
+  - flutter_screenutil: ^0.5.3
+  - fluttertoast: ^3.1.0
+  - shared_preferences: ^0.5.3+4
+  - fluro: ^1.6.3
+  - provider: ^3.0.0+1
+  - city_pickers: ^0.1.30
+  - flutter_easyrefresh: ^2.0.3
+  - flutter_webview_plugin: ^0.3.11
+  - cached_network_image: ^2.0.0
+  - flutter_stack_trace: ^1.0.1
+  - toast: ^0.1.5
+  - share: ^0.6.5+4
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 项目结构
+###### api 接口
+###### constant 常量
+###### entity 对象
+###### page 项目对应页面
+###### router 路由
+###### utils 各类工具类
+###### widget 各类widget
+
+```
+1、main.dart 项目入口
+2、mall.dart 首页容器
+3、首页四个Tab
+        HomeMain(),
+        ClassificationPage(),
+        CartPage(),
+        MinePage(),
+4、商品分类 SubCategory
+5、商品详情 GoodDetail
+6、订单详情 OrderDetailPage
+7、我的订单 MyOrderPage
+8、登录 LoginView
+...
+```
+#### 地图 支付功能暂未实现。
+
+
+
+
+
