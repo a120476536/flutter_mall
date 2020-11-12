@@ -6,10 +6,12 @@ import 'package:flutter_mall_self/api/api.dart';
 import 'package:flutter_mall_self/constant/strings.dart';
 import 'package:flutter_mall_self/entity/login2_entity.dart';
 import 'package:flutter_mall_self/entity/login_entity.dart';
+import 'package:flutter_mall_self/page/login/register_page.dart';
 import 'package:flutter_mall_self/utils/SharePreferenceUtils.dart';
 import 'package:flutter_mall_self/utils/event_bus.dart';
 import 'package:flutter_mall_self/utils/http_manager.dart';
 import 'package:flutter_mall_self/utils/http_util.dart';
+import 'package:flutter_mall_self/utils/navigator_util.dart';
 import 'package:flutter_mall_self/utils/toast_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:toast/toast.dart';
@@ -146,6 +148,12 @@ class _LoginViewState extends State<LoginView> {
                       ),
                     ),
                   ),
+                  InkWell(onTap: (){
+                      // NavigatorUtil.goRegisterPage(context);
+                    Navigator.of(context).push(MaterialPageRoute(builder: (_){
+                      return RegisterPage();
+                    },),);
+                  },child: Text('没有账号?立即注册'),),
                 ],
               ),
             ),

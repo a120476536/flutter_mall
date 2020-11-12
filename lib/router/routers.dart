@@ -31,6 +31,7 @@ class Routers {
   static String supportPage ="/supportPage";
   static String addressPage ="/addressPage";
   static String addressAddPage ="/addressAddPage";
+  static String registerPage ="/registerPage";
 
   static void configureRoutes(FluroRouter router) {
     router.notFoundHandler = Handler(handlerFunc:
@@ -49,5 +50,6 @@ class Routers {
     router.define(supportPage, handler: supportPageHandler);
     router.define(addressPage, handler: addressPageHandler);
     router.define(addressAddPage, handler: addressAddPageHandler);
+    router.define(registerPage, handler: registerPageHandler);
   }
 }

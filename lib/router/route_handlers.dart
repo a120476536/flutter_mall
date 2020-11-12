@@ -7,6 +7,7 @@ import 'package:flutter_mall_self/page/cart/cart_page.dart';
 import 'package:flutter_mall_self/page/goods/good_detail.dart';
 import 'package:flutter_mall_self/page/home/mall.dart';
 import 'package:flutter_mall_self/page/login/login_view.dart';
+import 'package:flutter_mall_self/page/login/register_page.dart';
 import 'package:flutter_mall_self/page/my/mine_page.dart';
 import 'package:flutter_mall_self/page/my/support_page.dart';
 import 'package:flutter_mall_self/page/order/my_order_page.dart';
@@ -56,4 +57,7 @@ var addressPageHandler = Handler(handlerFunc: (BuildContext context,Map<String,L
 var addressAddPageHandler = Handler(handlerFunc: (BuildContext context,Map<String,List<String>> parameters){
   String addressjson = parameters["addressjson"].first;
   return AddressAddPage(addressjson);
+});
+var registerPageHandler = Handler(handlerFunc: (BuildContext context,Map<String,List<String>> parameters){
+  return RegisterPage();
 });

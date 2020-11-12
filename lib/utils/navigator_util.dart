@@ -36,14 +36,6 @@ class NavigatorUtil {
 
   // ignore: non_constant_identifier_names
   static goOrderDetailPage(BuildContext context, var type, var jsonData) {
-
-    // GoodDetailEntity _enty = GoodDetailEntity().fromJson(jsonDecode(jsonData));
-    // print("type=$type");
-    // print("json=${_enty.data.toString()}");
-    // print("jsonData=$jsonData}");
-    // print("jsonDatachooseNum=${jsonData.indexof("chooseNum")}}");
-    // print("_enty.chooseNum=${int.parse(_enty.data.chooseNum.toString()).toString()}");
-    // print("_enty.chooseIndex=${_enty.data.chooseIndex.toString()}");
     Application.router.navigateTo(
         context,
         Routers.orderDetail +
@@ -54,13 +46,11 @@ class NavigatorUtil {
   }
 
   static goMyOrderPage(BuildContext context) {
-    Application.router.navigateTo(context, Routers.myOrder,
-        transition: TransitionType.inFromRight);
+    Application.router.navigateTo(context, Routers.myOrder, transition: TransitionType.inFromRight);
   }
 
   static goSupportPage(BuildContext context) {
-    Application.router.navigateTo(context, Routers.supportPage,
-        transition: TransitionType.inFromRight);
+    Application.router.navigateTo(context, Routers.supportPage, transition: TransitionType.inFromRight);
   }
 
   static goAddressPage(BuildContext context,var type) {
@@ -71,4 +61,8 @@ class NavigatorUtil {
   static goAddressAddPage(BuildContext context,var addressjson) {
     Application.router.navigateTo(context, Routers.addressAddPage+"?addressjson=${Uri.encodeComponent(addressjson)}", transition: TransitionType.inFromRight);
   }
+  static goRegisterPage(BuildContext context) {
+    Application.router.navigateTo(context, Routers.registerPage, transition: TransitionType.inFromRight);
+  }
+
 }

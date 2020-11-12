@@ -17,6 +17,8 @@ import 'package:flutter_mall_self/entity/category_entity.dart';
 import 'package:flutter_mall_self/generated/json/category_entity_helper.dart';
 import 'package:flutter_mall_self/entity/login2_entity.dart';
 import 'package:flutter_mall_self/generated/json/login2_entity_helper.dart';
+import 'package:flutter_mall_self/entity/register_entity.dart';
+import 'package:flutter_mall_self/generated/json/register_entity_helper.dart';
 import 'package:flutter_mall_self/entity/my_orders_entity.dart';
 import 'package:flutter_mall_self/generated/json/my_orders_entity_helper.dart';
 import 'package:flutter_mall_self/entity/address_entity.dart';
@@ -71,7 +73,10 @@ class JsonConvert<T> {
 			return categoryDataBrotherCategoryFromJson(data as CategoryDataBrotherCategory, json) as T;			case CategoryDataParentCategory:
 			return categoryDataParentCategoryFromJson(data as CategoryDataParentCategory, json) as T;			case Login2Entity:
 			return login2EntityFromJson(data as Login2Entity, json) as T;			case Login2UserInfo:
-			return login2UserInfoFromJson(data as Login2UserInfo, json) as T;			case MyOrdersEntity:
+			return login2UserInfoFromJson(data as Login2UserInfo, json) as T;			case RegisterEntity:
+			return registerEntityFromJson(data as RegisterEntity, json) as T;			case RegisterData:
+			return registerDataFromJson(data as RegisterData, json) as T;			case RegisterDataUserInfo:
+			return registerDataUserInfoFromJson(data as RegisterDataUserInfo, json) as T;			case MyOrdersEntity:
 			return myOrdersEntityFromJson(data as MyOrdersEntity, json) as T;			case MyOrdersData:
 			return myOrdersDataFromJson(data as MyOrdersData, json) as T;			case MyOrdersDataList:
 			return myOrdersDataListFromJson(data as MyOrdersDataList, json) as T;			case MyOrdersDataListGoodsList:
@@ -133,7 +138,10 @@ class JsonConvert<T> {
 			return categoryDataBrotherCategoryToJson(data as CategoryDataBrotherCategory);			case CategoryDataParentCategory:
 			return categoryDataParentCategoryToJson(data as CategoryDataParentCategory);			case Login2Entity:
 			return login2EntityToJson(data as Login2Entity);			case Login2UserInfo:
-			return login2UserInfoToJson(data as Login2UserInfo);			case MyOrdersEntity:
+			return login2UserInfoToJson(data as Login2UserInfo);			case RegisterEntity:
+			return registerEntityToJson(data as RegisterEntity);			case RegisterData:
+			return registerDataToJson(data as RegisterData);			case RegisterDataUserInfo:
+			return registerDataUserInfoToJson(data as RegisterDataUserInfo);			case MyOrdersEntity:
 			return myOrdersEntityToJson(data as MyOrdersEntity);			case MyOrdersData:
 			return myOrdersDataToJson(data as MyOrdersData);			case MyOrdersDataList:
 			return myOrdersDataListToJson(data as MyOrdersDataList);			case MyOrdersDataListGoodsList:
@@ -195,7 +203,10 @@ class JsonConvert<T> {
 			return CategoryDataBrotherCategory().fromJson(json);			case 'CategoryDataParentCategory':
 			return CategoryDataParentCategory().fromJson(json);			case 'Login2Entity':
 			return Login2Entity().fromJson(json);			case 'Login2UserInfo':
-			return Login2UserInfo().fromJson(json);			case 'MyOrdersEntity':
+			return Login2UserInfo().fromJson(json);			case 'RegisterEntity':
+			return RegisterEntity().fromJson(json);			case 'RegisterData':
+			return RegisterData().fromJson(json);			case 'RegisterDataUserInfo':
+			return RegisterDataUserInfo().fromJson(json);			case 'MyOrdersEntity':
 			return MyOrdersEntity().fromJson(json);			case 'MyOrdersData':
 			return MyOrdersData().fromJson(json);			case 'MyOrdersDataList':
 			return MyOrdersDataList().fromJson(json);			case 'MyOrdersDataListGoodsList':
@@ -258,7 +269,10 @@ class JsonConvert<T> {
 			return List<CategoryDataBrotherCategory>();			case 'CategoryDataParentCategory':
 			return List<CategoryDataParentCategory>();			case 'Login2Entity':
 			return List<Login2Entity>();			case 'Login2UserInfo':
-			return List<Login2UserInfo>();			case 'MyOrdersEntity':
+			return List<Login2UserInfo>();			case 'RegisterEntity':
+			return List<RegisterEntity>();			case 'RegisterData':
+			return List<RegisterData>();			case 'RegisterDataUserInfo':
+			return List<RegisterDataUserInfo>();			case 'MyOrdersEntity':
 			return List<MyOrdersEntity>();			case 'MyOrdersData':
 			return List<MyOrdersData>();			case 'MyOrdersDataList':
 			return List<MyOrdersDataList>();			case 'MyOrdersDataListGoodsList':
