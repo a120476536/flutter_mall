@@ -19,4 +19,14 @@ class ToastUtils{
         textColor: Colors.white,
         fontSize: ScreenUtil.instance.setSp(28.0));
   }
+  static showFlutterToastLong(String message) {
+    Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIos: 1,
+        backgroundColor: Colors.deepOrangeAccent,
+        textColor: Colors.white,
+        fontSize: ScreenUtil.instance.setSp(28.0));
+  }
 }

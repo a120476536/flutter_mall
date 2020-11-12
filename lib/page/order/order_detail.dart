@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_mall_self/api/api.dart';
 import 'package:flutter_mall_self/entity/address_entity.dart' show AddressDataList;
+import 'package:flutter_mall_self/entity/cart_all_entity.dart';
 import 'package:flutter_mall_self/entity/good_detail_entity.dart';
 import 'package:flutter_mall_self/entity/order_submit_entity.dart';
 import 'package:flutter_mall_self/utils/event_bus.dart';
@@ -35,6 +36,8 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
   AddressDataList addressDataList;
   OrderSubmitEntity _orderSubmitEntity;
   TextEditingController _remarkController = TextEditingController();
+
+  CartAllEntity _cartAllEntity;
   @override
   void initState() {
     // TODO: implement initState
@@ -54,12 +57,28 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
         _setLastPrice();
         break;
       case "1":
+        _cartAllEntity = CartAllEntity().fromJson(json.decode(jsonData));
+        _cartAllEntity.data.cartList.removeWhere((element){
+          return !element.isCheck;
+        });
+        print("购物车对象$_cartAllEntity");
+        print("购物车对象${_cartAllEntity.data.cartList.length}");
+        print("_entity111.chooseNum=$_chooseNum");
+        print("_entity111.chooseIndex=$_chooseIndex");
+        _setCartLastPrice();
         break;
     }
 
     _setListener();
   }
-
+  _setCartLastPrice(){
+   setState(() {
+     _lastPrice = 0;
+     for(var item in _cartAllEntity.data.cartList){
+       _lastPrice += item.price*item.number;
+     }
+   });
+  }
   void _setLastPrice() {
     setState(() {
       _lastPrice = 0;
@@ -79,8 +98,8 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
       return;
     }
     var parameters = {
-      // "cartId":0,
-      // "addressId":addressDataList.id,
+      "cartId":_cartAllEntity.data.cartList,
+      "addressId":addressDataList.id,
       "couponId":0,
       "message":_remarkController.text.isEmpty?"":_remarkController.text.toString(),
       "grouponRulesId":0,
@@ -97,12 +116,16 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
               ToastUtils.showFlutterToast("下单成功"),
               NavigatorUtil.goMallPage(context),
             }else{
-              ToastUtils.showFlutterToast("${_orderSubmitEntity.errmsg}API故障就当成功了跳转首页"),
+              ToastUtils.showFlutterToastLong("${_orderSubmitEntity.errmsg} API参数异常就当成功了跳转首页"),
               NavigatorUtil.goMallPage(context),
             }
           }
         }
     });
+  }
+
+  void _addOrCut(){
+    _setCartLastPrice();
   }
   @override
   Widget build(BuildContext context) {
@@ -167,25 +190,31 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
             [
               Container(
                 padding: EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      children: [
-                        Text(addressDataList==null?'个人信息':"${addressDataList.name}${addressDataList.tel}"),
-                        Text(addressDataList==null?'地址详情':"${addressDataList.province}${addressDataList.city}${addressDataList.county}${addressDataList.addressDetail}"),
-                      ],
-                    ),
-                    GestureDetector(
-                      onTap: (){
-                        Toast.show("1", context);
-                      },
-                      child: Icon(
-                        Icons.arrow_forward,
-                        size: 15.0,
+                child: InkWell(
+                  onTap: (){
+                    NavigatorUtil.goAddressPage(context,"1");
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(addressDataList==null?'个人信息':"${addressDataList.name} ${addressDataList.tel}"),
+                          Text(addressDataList==null?'地址详情':"${addressDataList.province} ${addressDataList.city} ${addressDataList.county} ${addressDataList.addressDetail}"),
+                        ],
                       ),
-                    ),
-                  ],
+                      GestureDetector(
+                        onTap: (){
+                          Toast.show("1", context);
+                        },
+                        child: Icon(
+                          Icons.arrow_forward,
+                          size: 15.0,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Divider(
@@ -291,9 +320,122 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
-              return Text("12");
+              return
+
+                Container(
+                  decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 1.0,color: Colors.grey))),
+                  child: Row(
+                    mainAxisAlignment:
+                    MainAxisAlignment.spaceAround,
+                    children: [
+                      Container(padding: EdgeInsets.only(right: 10.0),child: CachedImageView(50.0, 50.0, _cartAllEntity.data.cartList[index].picUrl)),
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          // mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                          children: [
+                            Text(_cartAllEntity
+                                .data.cartList[index].goodsName),
+                            Wrap(
+                              alignment: WrapAlignment.start,
+                              children: [
+                                Text(
+                                    "￥${_cartAllEntity.data.cartList[index].price}元"),
+                                Text("规格："+_cartAllEntity
+                                    .data
+                                    .cartList[index]
+                                    .specifications[0],style: TextStyle(color: Colors.red),),
+
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(right: 10.0),
+                        height: 25.0,
+                        child: Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  _cartAllEntity.data
+                                      .cartList[index].number++;
+                                });
+                                _addOrCut();
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(left: 10.0),
+                                width: 20.0,
+                                height: 20.0,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  border: new Border.all(
+                                      width: 1, color: Colors.grey),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(5.0),
+                                    bottomLeft:
+                                    Radius.circular(5.0),
+                                  ),
+                                ),
+                                child: Text('+'),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(left: 5.0, right: 5.0),
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      width: 1,
+                                      color: Colors.grey)),
+                              height: 20.0,
+                              alignment: Alignment.center,
+                              child: Wrap(
+                                alignment: WrapAlignment.center,
+                                children: [
+                                  Text(
+                                      "${_cartAllEntity.data.cartList[index].number}")
+                                ],
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  _cartAllEntity.data
+                                      .cartList[index].number--;
+                                  // ignore: unnecessary_statements
+                                  _cartAllEntity.data.cartList[index].number <= 0 ? _cartAllEntity.data.cartList[index].number = 1
+                                  // ignore: unnecessary_statements
+                                      : _cartAllEntity.data.cartList[index].number;
+                                  _addOrCut();
+                                });
+                              },
+                              child: Container(
+                                width: 20.0,
+                                height: 20.0,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  border: new Border.all(
+                                      width: 1, color: Colors.grey),
+                                  borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(5.0),
+                                    bottomRight:
+                                    Radius.circular(5.0),
+                                  ),
+                                ),
+                                child: Text('-'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+                ;
             },
-            childCount: 100,
+            childCount: _cartAllEntity.data.cartList.length,
           ),
         ),
       ],

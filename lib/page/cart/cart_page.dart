@@ -11,6 +11,7 @@ import 'package:flutter_mall_self/entity/login_entity.dart';
 import 'package:flutter_mall_self/utils/SharePreferenceUtils.dart';
 import 'package:flutter_mall_self/utils/event_bus.dart';
 import 'package:flutter_mall_self/utils/http_util.dart';
+import 'package:flutter_mall_self/utils/navigator_util.dart';
 import 'package:flutter_mall_self/widget/cached_image.dart';
 import 'package:flutter_mall_self/widget/empty_view.dart';
 import 'package:flutter_mall_self/widget/loading_dialog.dart';
@@ -27,8 +28,10 @@ class _CartPageState extends State<CartPage> {
   List<Widget> _list = List();
   var _lastMoney = 0;
   CartAllEntity _cartAllEntity;
+  CartAllEntity _cartAllEntityChoose;
   EasyRefreshController _controller = EasyRefreshController();
   LoginEntity _loginEntity;
+
   @override
   void initState() {
     super.initState();
@@ -134,6 +137,20 @@ class _CartPageState extends State<CartPage> {
       });
     });
   }
+  _clickGoOrderDetail(context){
+    // _cartAllEntityChoose = CartAllEntity();
+    // _cartAllEntityChoose.data = _cartAllEntity.data;
+    // _cartAllEntityChoose.data.cartList.removeWhere((element){
+    //   return !element.isCheck;
+    // });
+    // for(var item in _cartAllEntityChoose.data.cartList){
+    //   if(!item.isCheck){
+    //     _cartAllEntityChoose.data.cartList.remove(item);
+    //   }
+    // }
+    // NavigatorUtil.goOrderDetailPage(context, type, jsonData)
+    NavigatorUtil.goOrderDetailPage(context,"1-1-1",json.encode(_cartAllEntity));
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -170,7 +187,8 @@ class _CartPageState extends State<CartPage> {
                               _deleteGoods(index);
                             },
                             key: Key("key_$index"),
-                            child: Container(
+                            child:
+                            Container(
                               decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 1.0,color: Colors.grey))),
                               child: Row(
                                 mainAxisAlignment:
@@ -330,7 +348,8 @@ class _CartPageState extends State<CartPage> {
                                 ///备注如果当前按钮onpressed执行方法为空或者未定义，则默认当前按钮处于禁用状态，任何改动设置均不生效，比如颜色
                                 onPressed: () {
                                   Toast.show("点击结算", context);
-                                  _getCartList();
+                                  // _getCartList();
+                                  _clickGoOrderDetail(context);
                                 },
                                 color: Colors.deepOrange,
                                 child: Text(
