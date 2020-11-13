@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mall_self/api/api.dart';
 import 'package:flutter_mall_self/entity/address_entity.dart' show AddressDataList;
 import 'package:flutter_mall_self/entity/cart_all_entity.dart';
+import 'package:flutter_mall_self/entity/cart_check_entity.dart';
 import 'package:flutter_mall_self/entity/good_detail_entity.dart';
 import 'package:flutter_mall_self/entity/order_submit_entity.dart';
 import 'package:flutter_mall_self/utils/event_bus.dart';
@@ -35,11 +36,16 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
   int _chooseNum = 0;
   int _chooseIndex = 0;
   AddressDataList addressDataList;
-  OrderSubmitEntity _orderSubmitEntity;
+  CartCheckEntity _cartCheckEntity;
   TextEditingController _remarkController = TextEditingController();
 
   CartAllEntity _cartAllEntity;
   Options options = Options();
+  OrderSubmitEntity _orderSubmitEntity;
+  var cardId = 0;
+  var couponId = 0;
+  var grouponRulesId = 0;
+  var freightPrice = 0;
   @override
   void initState() {
     // TODO: implement initState
@@ -49,6 +55,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
     typeList = type.split("-");
     _chooseNum = int.parse(typeList[1]);
     _chooseIndex = int.parse(typeList[2]);
+    _cartOrder();//下单前需要调用当前数据。
     switch (typeList[0]) {
       case "0":
         _goodDetailEntity = GoodDetailEntity().fromJson(json.decode(jsonData));
@@ -70,7 +77,6 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
         _setCartLastPrice();
         break;
     }
-
     _setListener();
   }
   _setCartLastPrice(){
@@ -95,22 +101,31 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
     });
   }
   _cartOrder(){
-    if(addressDataList==null){
-      ToastUtils.showFlutterToast("地址暂未选择");
-      return;
-    }
+    // if(addressDataList==null){
+    //   ToastUtils.showFlutterToast("地址暂未选择");
+    //   return;
+    // }
     var parameters = {
       "cartId": 0,
       "addressId": 0,
       "couponId": 0,
       "grouponRulesId": 0,
     };
+
     HttpUtil.instance.get(Api.BASE_URL+Api.CART_BUY, parameters: parameters).then((value) => {
+
+      print("订单页面请求购物车列表$value"),
       if(value!=null){
-        _orderSubmitEntity = OrderSubmitEntity().fromJson(json.decode(value.toString())),
-        if(_orderSubmitEntity.errno==0){
-          ToastUtils.showFlutterToast("下单成功"),
-          NavigatorUtil.goMallPage(context),
+        _cartCheckEntity = CartCheckEntity().fromJson(json.decode(value.toString())),
+        if(_cartCheckEntity.errno==0){
+          // ToastUtils.showFlutterToast("下单成功"),
+          setState(() {
+            cardId = _cartCheckEntity.data.cartId;
+            couponId = _cartCheckEntity.data.couponId;
+            grouponRulesId = _cartCheckEntity.data.grouponRulesId;
+            freightPrice = _cartCheckEntity.data.freightPrice;
+          }),
+                      // NavigatorUtil.goMallPage(context),
         }else{
           // ToastUtils.showFlutterToastLong("${_orderSubmitEntity.errmsg} API参数异常就当成功了跳转首页"),
           NavigatorUtil.goMallPage(context),
@@ -124,25 +139,32 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
       return;
     }
     var parameters = {
-      "cartId":0,
-      "addressId":addressDataList.id,
-      "couponId":0,
-      "message":_remarkController.text.isEmpty?"":_remarkController.text.toString(),
-      "grouponRulesId":0,
-      "grouponLinkId":0,
+      // "cartId":0,
+      // "addressId":addressDataList.id,
+      // "couponId":0,
+      // "message":_remarkController.text.isEmpty?"暂无":_remarkController.text.toString(),
+      // "grouponRulesId":0,
+      // "grouponLinkId":0,
+      "cartId": cardId,
+      "addressId": addressDataList.id,
+      "message": _remarkController.text == null ? "" : _remarkController.text,
+      "couponId": couponId,
+      "grouponRulesId": grouponRulesId,
+      "grouponLinkId": 0
     };
     // HttpUtil.instance.post(Api.SUBMIT_ORDER,  options: options,parameters: parameters,);
-    HttpUtil.instance.post(Api.BASE_URL + Api.SUBMIT_ORDER, parameters: parameters, options: options).then((value) => {
+    HttpUtil.instance.post(Api.BASE_URL + Api.SUBMIT_ORDER, options: options,parameters: parameters).then((value) => {
+      print("下单返回$value"),
       if (value != null)
         {
           _orderSubmitEntity = OrderSubmitEntity().fromJson(json.decode(value.toString())),
           if(_orderSubmitEntity!=null){
             if(_orderSubmitEntity.errno==0){
-              ToastUtils.showFlutterToast("下单成功"),
+              ToastUtils.showFlutterToast("下单成功，仅支持购物车下单，无论购物车选中多少直接下单成功"),
               NavigatorUtil.goMallPage(context),
             }else{
-              ToastUtils.showFlutterToastLong("${_orderSubmitEntity.errmsg} API参数异常就当成功了跳转首页"),
-              NavigatorUtil.goMallPage(context),
+              ToastUtils.showFlutterToastLong("仅支持购物车跳转后下单。${_orderSubmitEntity.errmsg} API参数异常就当成功了跳转首页--ps：不支持直接商品下单"),
+              // NavigatorUtil.goMallPage(context),
             }
           }
         }
@@ -347,7 +369,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                   padding: EdgeInsets.all(10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [Text('运费'), Text('￥0')],
+                    children: [Text('运费'), Text('￥$freightPrice')],
                   )),
               Divider(
                 height: 1.0,
@@ -610,7 +632,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                   padding: EdgeInsets.all(10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [Text('运费'), Text('￥0')],
+                    children: [Text('运费'), Text('￥$freightPrice')],
                   )),
               Divider(
                 height: 1.0,

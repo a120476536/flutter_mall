@@ -11,6 +11,8 @@ import 'package:flutter_mall_self/entity/add_cart_entity.dart';
 import 'package:flutter_mall_self/generated/json/add_cart_entity_helper.dart';
 import 'package:flutter_mall_self/entity/save_address_entity.dart';
 import 'package:flutter_mall_self/generated/json/save_address_entity_helper.dart';
+import 'package:flutter_mall_self/entity/cart_check_entity.dart';
+import 'package:flutter_mall_self/generated/json/cart_check_entity_helper.dart';
 import 'package:flutter_mall_self/entity/good_detail_entity.dart';
 import 'package:flutter_mall_self/generated/json/good_detail_entity_helper.dart';
 import 'package:flutter_mall_self/entity/category_entity.dart';
@@ -56,7 +58,11 @@ class JsonConvert<T> {
 			return cartAllDataCartTotalFromJson(data as CartAllDataCartTotal, json) as T;			case CartAllDataCartList:
 			return cartAllDataCartListFromJson(data as CartAllDataCartList, json) as T;			case AddCartEntity:
 			return addCartEntityFromJson(data as AddCartEntity, json) as T;			case SaveAddressEntity:
-			return saveAddressEntityFromJson(data as SaveAddressEntity, json) as T;			case GoodDetailEntity:
+			return saveAddressEntityFromJson(data as SaveAddressEntity, json) as T;			case CartCheckEntity:
+			return cartCheckEntityFromJson(data as CartCheckEntity, json) as T;			case CartCheckData:
+			return cartCheckDataFromJson(data as CartCheckData, json) as T;			case CartCheckDataCheckedAddress:
+			return cartCheckDataCheckedAddressFromJson(data as CartCheckDataCheckedAddress, json) as T;			case CartCheckDataCheckedGoodsList:
+			return cartCheckDataCheckedGoodsListFromJson(data as CartCheckDataCheckedGoodsList, json) as T;			case GoodDetailEntity:
 			return goodDetailEntityFromJson(data as GoodDetailEntity, json) as T;			case GoodDetailData:
 			return goodDetailDataFromJson(data as GoodDetailData, json) as T;			case GoodDetailDataSpecificationList:
 			return goodDetailDataSpecificationListFromJson(data as GoodDetailDataSpecificationList, json) as T;			case GoodDetailDataSpecificationListValueList:
@@ -121,7 +127,11 @@ class JsonConvert<T> {
 			return cartAllDataCartTotalToJson(data as CartAllDataCartTotal);			case CartAllDataCartList:
 			return cartAllDataCartListToJson(data as CartAllDataCartList);			case AddCartEntity:
 			return addCartEntityToJson(data as AddCartEntity);			case SaveAddressEntity:
-			return saveAddressEntityToJson(data as SaveAddressEntity);			case GoodDetailEntity:
+			return saveAddressEntityToJson(data as SaveAddressEntity);			case CartCheckEntity:
+			return cartCheckEntityToJson(data as CartCheckEntity);			case CartCheckData:
+			return cartCheckDataToJson(data as CartCheckData);			case CartCheckDataCheckedAddress:
+			return cartCheckDataCheckedAddressToJson(data as CartCheckDataCheckedAddress);			case CartCheckDataCheckedGoodsList:
+			return cartCheckDataCheckedGoodsListToJson(data as CartCheckDataCheckedGoodsList);			case GoodDetailEntity:
 			return goodDetailEntityToJson(data as GoodDetailEntity);			case GoodDetailData:
 			return goodDetailDataToJson(data as GoodDetailData);			case GoodDetailDataSpecificationList:
 			return goodDetailDataSpecificationListToJson(data as GoodDetailDataSpecificationList);			case GoodDetailDataSpecificationListValueList:
@@ -186,7 +196,11 @@ class JsonConvert<T> {
 			return CartAllDataCartTotal().fromJson(json);			case 'CartAllDataCartList':
 			return CartAllDataCartList().fromJson(json);			case 'AddCartEntity':
 			return AddCartEntity().fromJson(json);			case 'SaveAddressEntity':
-			return SaveAddressEntity().fromJson(json);			case 'GoodDetailEntity':
+			return SaveAddressEntity().fromJson(json);			case 'CartCheckEntity':
+			return CartCheckEntity().fromJson(json);			case 'CartCheckData':
+			return CartCheckData().fromJson(json);			case 'CartCheckDataCheckedAddress':
+			return CartCheckDataCheckedAddress().fromJson(json);			case 'CartCheckDataCheckedGoodsList':
+			return CartCheckDataCheckedGoodsList().fromJson(json);			case 'GoodDetailEntity':
 			return GoodDetailEntity().fromJson(json);			case 'GoodDetailData':
 			return GoodDetailData().fromJson(json);			case 'GoodDetailDataSpecificationList':
 			return GoodDetailDataSpecificationList().fromJson(json);			case 'GoodDetailDataSpecificationListValueList':
@@ -252,7 +266,11 @@ class JsonConvert<T> {
 			return List<CartAllDataCartTotal>();			case 'CartAllDataCartList':
 			return List<CartAllDataCartList>();			case 'AddCartEntity':
 			return List<AddCartEntity>();			case 'SaveAddressEntity':
-			return List<SaveAddressEntity>();			case 'GoodDetailEntity':
+			return List<SaveAddressEntity>();			case 'CartCheckEntity':
+			return List<CartCheckEntity>();			case 'CartCheckData':
+			return List<CartCheckData>();			case 'CartCheckDataCheckedAddress':
+			return List<CartCheckDataCheckedAddress>();			case 'CartCheckDataCheckedGoodsList':
+			return List<CartCheckDataCheckedGoodsList>();			case 'GoodDetailEntity':
 			return List<GoodDetailEntity>();			case 'GoodDetailData':
 			return List<GoodDetailData>();			case 'GoodDetailDataSpecificationList':
 			return List<GoodDetailDataSpecificationList>();			case 'GoodDetailDataSpecificationListValueList':
