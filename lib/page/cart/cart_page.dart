@@ -159,7 +159,7 @@ class _CartPageState extends State<CartPage> {
         centerTitle: true,
       ),
       body: !_isLogin
-          ? EmptyView():_cartAllEntity==null||_cartAllEntity.data.cartList!=null||_cartAllEntity.data.cartList.length!=0?Stack(
+          ? EmptyView():_cartAllEntity!=null||_cartAllEntity.data.cartList!=null||_cartAllEntity.data.cartList.length!=0?Stack(
               children: [
                 Container(
                   margin: EdgeInsets.only(bottom: 50.0),
@@ -317,6 +317,7 @@ class _CartPageState extends State<CartPage> {
                         },
                       )),
                 ),
+                _cartAllEntity.data.cartList.length!=0?
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
@@ -361,7 +362,7 @@ class _CartPageState extends State<CartPage> {
                       ],
                     ),
                   ),
-                ),
+                ):Container(),
               ],
             ):LoadingDialog(),
     );
