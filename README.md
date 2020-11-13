@@ -15,7 +15,7 @@ ios apk 请自行打包。
 
 github :  https://github.com/a120476536/flutter_mall.git
 gitee  :  https://gitee.com/qobn/flutter_mall.git
-
+##### ==项目中用到插件jsonToDartBean，需在studio中安装，不然各种对象会报错==
 ## 插件
   - flutter_swiper: ^1.1.6
   - json_annotation: ^2.3.0

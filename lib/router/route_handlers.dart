@@ -6,6 +6,7 @@ import 'package:flutter_mall_self/page/address/address_page.dart';
 import 'package:flutter_mall_self/page/cart/cart_page.dart';
 import 'package:flutter_mall_self/page/goods/good_detail.dart';
 import 'package:flutter_mall_self/page/home/mall.dart';
+import 'package:flutter_mall_self/page/home/splash_page.dart';
 import 'package:flutter_mall_self/page/login/login_view.dart';
 import 'package:flutter_mall_self/page/login/register_page.dart';
 import 'package:flutter_mall_self/page/my/mine_page.dart';
@@ -60,4 +61,7 @@ var addressAddPageHandler = Handler(handlerFunc: (BuildContext context,Map<Strin
 });
 var registerPageHandler = Handler(handlerFunc: (BuildContext context,Map<String,List<String>> parameters){
   return RegisterPage();
+});
+var splashPageHandler = Handler(handlerFunc: (BuildContext context,Map<String,List<String>> parameters){
+  return SplashPage();
 });

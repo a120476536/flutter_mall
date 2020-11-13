@@ -32,8 +32,10 @@ class _LoginViewState extends State<LoginView> {
     // TODO: implement initState
     super.initState();
     SharePreference.getShareData(Strings.TOKEN).then((value) => {
-      if(value!=null){
-
+      if(value==null){
+        _goLogin(),
+      }else{
+        print('已登录'),
       }
     });
   }
@@ -41,24 +43,30 @@ class _LoginViewState extends State<LoginView> {
     Map<String, dynamic> map = Map();
     map.putIfAbsent("username", () => _accountTextControl.text.toString());
     map.putIfAbsent("password", () => _passwordTextControl.text.toString());
+    SharePreference.getShareData(Strings.TOKEN).then((value) => {
+      if (value == null)
+            {
+              HttpUtil.instance.post(Api.BASE_URL + Api.LOGIN, parameters: map).then((value) => {
+                        print('登录结果$value'),
+                        _loginEntity = LoginEntity().fromJson(json.decode(value.toString())),
+                        // ignore: unrelated_type_equality_checks
+                        print("登录对象${_loginEntity.toString()}"),
+                        // ignore: unrelated_type_equality_checks
+                        print("登录对象errno${_loginEntity.errno == "0"}"),
+                        if (_loginEntity.errno == "0"){
+                            SharePreference.saveShareData(Strings.TOKEN, _loginEntity.data.token),
+                            SharePreference.saveShareData(Strings.NICK_NAME, _loginEntity.data.userInfo.nickName),
+                            SharePreference.saveShareData(Strings.AVATARURL, _loginEntity.data.userInfo.avatarUrl),
+                            eventBus.fire(LoginEvent(_loginEntity)),
+                            Navigator.of(context).pop(),
+                          }
+                        else {ToastUtils.showToast(context, _loginEntity.errmsg)}
+                      }),
+            }
+        });
 
-    HttpUtil.instance.post(Api.BASE_URL+Api.LOGIN, parameters: map).then((value) => {
-      print('登录结果$value'),
-      _loginEntity = LoginEntity().fromJson(json.decode(value.toString())),
-        // ignore: unrelated_type_equality_checks
-      print("登录对象${_loginEntity.toString()}"),
-      // ignore: unrelated_type_equality_checks
-      print("登录对象errno${_loginEntity.errno=="0"}"),
-        if (_loginEntity.errno=="0") {
-            SharePreference.saveShareData(Strings.TOKEN, _loginEntity.data.token),
-            SharePreference.saveShareData(Strings.NICK_NAME, _loginEntity.data.userInfo.nickName),
-            SharePreference.saveShareData(Strings.AVATARURL, _loginEntity.data.userInfo.avatarUrl),
-            eventBus.fire(LoginEvent(_loginEntity)),
-            Navigator.of(context).pop(),
-        } else {
-          ToastUtils.showToast(context, _loginEntity.errmsg)
-        }
-    });
+
+
   }
 
   @override

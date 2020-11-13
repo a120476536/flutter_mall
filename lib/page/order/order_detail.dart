@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mall_self/api/api.dart';
 import 'package:flutter_mall_self/entity/address_entity.dart' show AddressDataList;
@@ -38,6 +39,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
   TextEditingController _remarkController = TextEditingController();
 
   CartAllEntity _cartAllEntity;
+  Options options = Options();
   @override
   void initState() {
     // TODO: implement initState
@@ -92,22 +94,45 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
       });
     });
   }
+  _cartOrder(){
+    if(addressDataList==null){
+      ToastUtils.showFlutterToast("地址暂未选择");
+      return;
+    }
+    var parameters = {
+      "cartId": 0,
+      "addressId": 0,
+      "couponId": 0,
+      "grouponRulesId": 0,
+    };
+    HttpUtil.instance.get(Api.BASE_URL+Api.CART_BUY, parameters: parameters).then((value) => {
+      if(value!=null){
+        _orderSubmitEntity = OrderSubmitEntity().fromJson(json.decode(value.toString())),
+        if(_orderSubmitEntity.errno==0){
+          ToastUtils.showFlutterToast("下单成功"),
+          NavigatorUtil.goMallPage(context),
+        }else{
+          // ToastUtils.showFlutterToastLong("${_orderSubmitEntity.errmsg} API参数异常就当成功了跳转首页"),
+          NavigatorUtil.goMallPage(context),
+        }
+      }
+    });
+  }
   _submitOrder(){
     if(addressDataList==null){
       ToastUtils.showFlutterToast("地址暂未选择");
       return;
     }
     var parameters = {
-      "cartId":_cartAllEntity.data.cartList,
+      "cartId":0,
       "addressId":addressDataList.id,
       "couponId":0,
       "message":_remarkController.text.isEmpty?"":_remarkController.text.toString(),
       "grouponRulesId":0,
       "grouponLinkId":0,
     };
-    HttpUtil.instance
-        .post(Api.BASE_URL + Api.SUBMIT_ORDER, parameters: parameters)
-        .then((value) => {
+    // HttpUtil.instance.post(Api.SUBMIT_ORDER,  options: options,parameters: parameters,);
+    HttpUtil.instance.post(Api.BASE_URL + Api.SUBMIT_ORDER, parameters: parameters, options: options).then((value) => {
       if (value != null)
         {
           _orderSubmitEntity = OrderSubmitEntity().fromJson(json.decode(value.toString())),
@@ -122,6 +147,22 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
           }
         }
     });
+    // HttpUtil.instance.post(Api.BASE_URL + Api.SUBMIT_ORDER,options: options, parameters: parameters)
+    //     .then((value) => {
+    //   if (value != null)
+    //     {
+    //       _orderSubmitEntity = OrderSubmitEntity().fromJson(json.decode(value.toString())),
+    //       if(_orderSubmitEntity!=null){
+    //         if(_orderSubmitEntity.errno==0){
+    //           ToastUtils.showFlutterToast("下单成功"),
+    //           NavigatorUtil.goMallPage(context),
+    //         }else{
+    //           ToastUtils.showFlutterToastLong("${_orderSubmitEntity.errmsg} API参数异常就当成功了跳转首页"),
+    //           NavigatorUtil.goMallPage(context),
+    //         }
+    //       }
+    //     }
+    // });
   }
 
   void _addOrCut(){
@@ -160,7 +201,8 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
               child: GestureDetector(
                 onTap: () {
                   // Toast.show("去付款", context);
-                  _submitOrder();
+                  _submitOrder();//下单接口接收参数异常。换用购物车下单
+                  // _cartOrder();
                 },
                 child: Text(
                   '付款',
