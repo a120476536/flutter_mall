@@ -43,9 +43,9 @@ dependencies:
   toast: ^0.1.5
   share: ^0.6.5+4
 #  map_launcher: ^1.0.0
-#  flutter_bmflocation: ^1.0.2
-#  flutter_bmfmap:  ^1.0.2
-#  flutter_bmfutils: ^1.0.2
+  flutter_bmflocation: ^1.0.2
+  flutter_bmfmap:  ^1.0.2
+  flutter_bmfutils: ^1.0.2
   #  amap_base: ^0.3.5
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

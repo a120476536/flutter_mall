@@ -32,9 +32,6 @@ class GridMenu extends StatelessWidget {
           return Center(
             child: InkWell(
               onTap: (){
-                // Navigator.of(context).push(new MaterialPageRoute(builder: (_){
-                //     return SubCategory(categoryList[index].id,categoryList[index].name);
-                // },),);
                 NavigatorUtil.goSubcategoryPage(context, categoryList[index].id.toString(), categoryList[index].name);
               },
               child: Column(

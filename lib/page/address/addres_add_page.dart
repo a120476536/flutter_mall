@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mall_self/api/api.dart';
 import 'package:flutter_mall_self/entity/address_entity.dart';
 import 'package:flutter_mall_self/entity/save_address_entity.dart';
+import 'package:flutter_mall_self/page/map/map_page.dart';
+import 'package:flutter_mall_self/page/map/map_show_page.dart';
 import 'package:flutter_mall_self/utils/event_bus.dart';
 import 'package:flutter_mall_self/utils/http_util.dart';
 import 'package:flutter_mall_self/utils/toast_utils.dart';
@@ -34,14 +36,15 @@ class _AddressAddPageState extends State<AddressAddPage> {
   var addressjson;
   AddressDataList _addressDataList;
   SaveAddressEntity _saveAddressEntity;
-  _saveAddress(){
-    if(_controllerUser.text.toString().isEmpty){
+
+  _saveAddress() {
+    if (_controllerUser.text.toString().isEmpty) {
       ToastUtils.showToast(context, "联系人姓名不能为空");
       return;
-    }else if(_controllerPhone.text.toString().isEmpty){
+    } else if (_controllerPhone.text.toString().isEmpty) {
       ToastUtils.showToast(context, "联系人电话不能为空");
       return;
-    }else if(_controllerAddressDetail.text.toString().isEmpty){
+    } else if (_controllerAddressDetail.text.toString().isEmpty) {
       ToastUtils.showToast(context, "联系人地址不能为空");
       return;
     }
@@ -61,13 +64,17 @@ class _AddressAddPageState extends State<AddressAddPage> {
         .then((value) => {
               if (value != null)
                 {
-                  _saveAddressEntity = SaveAddressEntity().fromJson(json.decode(value.toString())),
-                  if (_saveAddressEntity.errno == 0){
+                  _saveAddressEntity = SaveAddressEntity()
+                      .fromJson(json.decode(value.toString())),
+                  if (_saveAddressEntity.errno == 0)
+                    {
                       eventBus.fire(SaveAddressEvent(true)),
                       Navigator.pop(context),
-                    }else{
-                    ToastUtils.showFlutterToast(_saveAddressEntity.errmsg),
-                  }
+                    }
+                  else
+                    {
+                      ToastUtils.showFlutterToast(_saveAddressEntity.errmsg),
+                    }
                 }
             });
   }
@@ -82,7 +89,8 @@ class _AddressAddPageState extends State<AddressAddPage> {
             child: Text(item,
                 maxLines: 1,
                 style: TextStyle(fontSize: ScreenUtil.instance.setSp(26.0))));
-      },);
+      },
+    );
     print(temp);
     setState(() {
       _cityText = temp.provinceName + temp.cityName + temp.areaName;
@@ -91,7 +99,6 @@ class _AddressAddPageState extends State<AddressAddPage> {
       _cityName = temp.cityName;
       _countryName = temp.areaName;
     });
-
   }
 
   @override
@@ -99,26 +106,28 @@ class _AddressAddPageState extends State<AddressAddPage> {
     // TODO: implement initState
     super.initState();
     addressjson = widget.addressjson;
-    if(addressjson!="1"){
-      if(addressjson!=null||addressjson!=""){
+    if (addressjson != "1") {
+      if (addressjson != null || addressjson != "") {
         _addressDataList = AddressDataList().fromJson(json.decode(addressjson));
-        if(_addressDataList!=null){
+        if (_addressDataList != null) {
           setState(() {
             _controllerUser.text = _addressDataList.name;
             _controllerPhone.text = _addressDataList.tel;
             _controllerAddressDetail.text = _addressDataList.addressDetail;
-            _cityText = _addressDataList.province+_addressDataList.city+_addressDataList.county;
+            _cityText = _addressDataList.province +
+                _addressDataList.city +
+                _addressDataList.county;
             choose = _addressDataList.isDefault;
             _areaId = _addressDataList.areaCode;
             _cityName = _addressDataList.city;
             _countryName = _addressDataList.county;
             _provinceName = _addressDataList.province;
-
           });
         }
       }
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -178,8 +187,15 @@ class _AddressAddPageState extends State<AddressAddPage> {
               },
             ),
           ),
+          // InkWell(
+          //   onTap: (){
+          //     _showChooseCity(context);
+          //   },
+          //   child:
+
+          // ),
           InkWell(
-            onTap: (){
+            onTap: () {
               _showChooseCity(context);
             },
             child: Container(
@@ -191,7 +207,7 @@ class _AddressAddPageState extends State<AddressAddPage> {
               margin: EdgeInsets.only(left: 10.0, right: 10.0, top: 20.0),
               padding: EdgeInsets.only(bottom: 10.0),
               alignment: Alignment.centerLeft,
-              child: Text(_cityText==null?'请选择地址':_cityText),
+              child: Text(_cityText == null ? '请选择地址' : _cityText),
             ),
           ),
           Container(
@@ -236,9 +252,37 @@ class _AddressAddPageState extends State<AddressAddPage> {
               ],
             ),
           ),
+          Column(
+            children: [
+              InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) {
+                          return MapPage();
+                        },
+                      ),
+                    );
+                  },
+                  child: Text("地图定位")),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) {
+                        return MapShowPage();
+                      },
+                    ),
+                  );
+                },
+                child: Text("地图展示"),
+              ),
+            ],
+          )
         ],
       ),
-      bottomNavigationBar: BottomAppBar(child: InkWell(
+      bottomNavigationBar: BottomAppBar(
+        child: InkWell(
           onTap: () {
             print('提交保存地址');
             _saveAddress();
@@ -251,7 +295,9 @@ class _AddressAddPageState extends State<AddressAddPage> {
               '提交',
               style: TextStyle(color: Colors.white, fontSize: 15.0),
             ),
-          ),),),
+          ),
+        ),
+      ),
     );
   }
 }
